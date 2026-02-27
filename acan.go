@@ -19,7 +19,7 @@ func acan(card Card, place int) ([]string, int, []string, []int) {
 		X, Y = getBinary(0), getBinary(target)
 		q, r = 0, target
 	}
-	return getShuffle(X, Y), start, []string{X, Y}, []int{start*64 - target, q, 52 * q, r}
+	return getShuffle(X, Y), start, []string{X, Y}, []int{start * 64, start*64 - target, q, 52 * q, r}
 }
 
 func getBinaries(S int) (string, string, int, int) {
