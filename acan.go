@@ -4,18 +4,25 @@ import (
 	"strconv"
 )
 
-func acan(card Card, place int) ([]string, int) {
+func acan(card Card, place int) ([]string, int, []string, []int) {
 	start := getStart(card)
 	target := place - 1
+	var q, r int
+	var X, Y string
+	if start != 0 {
 
-	M := start * 64
-	S := M - target
+		M := start * 64
+		S := M - target
 
-	X, Y := getBinaries(S)
-	return getShuffle(X, Y), start
+		X, Y, q, r = getBinaries(S)
+	} else {
+		X, Y = getBinary(0), getBinary(target)
+		q, r = 0, target
+	}
+	return getShuffle(X, Y), start, []string{X, Y}, []int{start * 64, q, 52 * q, r}
 }
 
-func getBinaries(S int) (string, string) {
+func getBinaries(S int) (string, string, int, int) {
 	var q, r int
 	if S%52 == 0 {
 		q = S / 52
@@ -24,7 +31,7 @@ func getBinaries(S int) (string, string) {
 		q = S/52 + 1
 		r = 52*q - S
 	}
-	return getBinary(q), getBinary(r)
+	return getBinary(q), getBinary(r), q, r
 }
 
 func getBinary(num int) string {

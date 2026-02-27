@@ -53,10 +53,10 @@ func shuffleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 🔥 Tes fonctions existantes
-	shuffle, _ := acan(card, place)
+	shuffle, start, bin, euc := acan(card, place)
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(shuffle)
+	json.NewEncoder(w).Encode([]any{shuffle, start, bin, euc})
 }
 
 func includes(list []string, mot string) bool {
